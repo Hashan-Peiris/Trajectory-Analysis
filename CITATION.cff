@@ -1,0 +1,24 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Trajectory analysis
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: 'M.D.Hashan .C. '
+    family-names: Peiris
+    email: peiris.mdhc@gmail.com
+    name-particle: Makumburage Don Hashan Chathuranga
+    affiliation: Binghamton University
+    orcid: 'https://orcid.org/0000-0002-8706-452X'
+repository-code: 'https://github.com/Hashan-Peiris/Trajectory-Analysis'
+keywords:
+  - AIMD
+  - VASP
+  - xyz file
+  - ab initio molecular dynamics
+  - trajectory
+license: MIT
