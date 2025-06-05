@@ -19,17 +19,31 @@ import re
 import linecache
 import sys
 import time as tm
-
+import json
+import argparse
 start = tm.time()
-# ------------------------------------------------------------------------------------------
-filename='Distances5.xyz'
-AtmA=[380,384,389,396,407,409,414,420,423,427,432,438,446,450]
-AtmB=["O","O"]
-Range=8.0    # Max radius
-Limit=0.05   # Bin size
-Type=["All","O","C","Li","H","B","F","Ni"]     # To get the RDF relative to all elements or just some of them. Type "All" or one element name
-multiply=25  # To compensate for the no of timesteps skipped when converting. Not used here.
-# ------------------------------------------------------------------------------------------
+
+parser = argparse.ArgumentParser(
+    description="Compute cumulative RDF using parameters from a configuration file"
+)
+parser.add_argument(
+    "config",
+    nargs="?",
+    default="rdf_config.json",
+    help="Path to JSON file containing input parameters",
+)
+args = parser.parse_args()
+
+with open(args.config) as cfg_file:
+    cfg = json.load(cfg_file)
+
+filename = cfg["filename"]
+AtmA = cfg["AtmA"]
+AtmB = cfg["AtmB"]
+Range = cfg["Range"]    # Max radius
+Limit = cfg["Limit"]   # Bin size
+Type = cfg["Type"]     # To get the RDF relative to all elements or just some of them
+multiply = cfg.get("multiply", 1)  # To compensate for the no of timesteps skipped when converting
 
 xyz=open(filename,'r')
 totnum=int(xyz.readline().rstrip('\n'))

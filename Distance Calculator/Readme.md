@@ -3,6 +3,9 @@ All xyz files need to be tabulated in the following format which can be easily d
 ------------------------------------------------------------------------------------
 Atom ID    |    Element Name   |    X   |    Y   |    Z    |
 
+The script now reads its input parameters from a JSON file named `distance_config.json`.
+Provide the filename and atom index pairs there before running the program.
+
 ### Performance note
 Distance computations now use NumPy array operations. A small synthetic
 benchmark (1000 steps, 60 pairs) completed in **~0.005 s** versus **~0.49 s**
