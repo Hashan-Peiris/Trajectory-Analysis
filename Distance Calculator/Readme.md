@@ -1,12 +1,19 @@
-These codes are used to analyze the AIMD/CMD trajectories stored in the .xyz format. This calculates distances between specified pairs of atoms.
-All xyz files need to be tabulated in the following format which can be easily done using the Ovito Basic program.
-------------------------------------------------------------------------------------
-Atom ID    |    Element Name   |    X   |    Y   |    Z    |
+# Distance Calculator
 
-The script now reads its input parameters from a JSON file named `distance_config.json`.
-Provide the filename and atom index pairs there before running the program.
+This script computes distances between selected pairs of atoms for every step of a trajectory. The input trajectory must be exported from Ovito in `.xyz` format with atom indices in the first column:
+
+```
+AtomID  Element  X  Y  Z
+```
+
+All runtime options are defined in `distance_config.json` (trajectory filename and lists of atom indices). Run the program as:
+
+```bash
+python DistanceDistances.py distance_config.json
+```
+
+The distances for each pair are written to `ORDERED_LIST.txt`.
 
 ### Performance note
-Distance computations now use NumPy array operations. A small synthetic
-benchmark (1000 steps, 60 pairs) completed in **~0.005 s** versus **~0.49 s**
-with the previous double loops on Python 3.12.
+
+Distance computations use NumPy for vectorised operations. A synthetic benchmark (1000 steps, 60 pairs) completed in **~0.005 s** on Python 3.12 versus **~0.49 s** for the previous nested-loop version.
