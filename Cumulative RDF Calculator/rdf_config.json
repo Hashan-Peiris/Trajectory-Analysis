@@ -1,9 +1,17 @@
 {
-  "filename": "Distances5.xyz",
-  "AtmA": [380,384,389,396,407,409,414,420,423,427,432,438,446,450],
-  "AtmB": ["O","O"],
+  "filename": "trajectory.xyz",
   "Range": 8.0,
   "Limit": 0.05,
-  "Type": ["All","O","C","Li","H","B","F","Ni"],
-  "multiply": 25
+  "Type": ["All"],
+  "groups": {
+    "mol1": [1,2,3],
+    "mol2": [4,5,6]
+  },
+  "include_groups": [],
+  "exclude_groups": [],
+  "pair_include": {
+    "mol1": ["mol2"]
+  },
+  "pair_exclude": {},
+  "plot_individual": false
 }
