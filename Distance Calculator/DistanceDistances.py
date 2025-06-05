@@ -22,15 +22,27 @@ import numpy as np
 import re
 import linecache
 import time
+import json
+import argparse
 
-filename = 'All.xyz'
-AtmA = [57, 58, 59, 60, 49, 50, 51, 52, 57, 58, 59, 60, 45, 46, 47, 48, 37, 38, 39, 40, 45, 46, 47, 48, 33, 34, 35, 36,
-        25, 26, 27, 28, 33, 34, 35, 36, 13, 14, 15, 16, 17, 18, 19, 20, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3,
-        4]
-AtmB = [49, 50, 51, 52, 53, 54, 55, 56, 53, 54, 55, 56, 37, 38, 39, 40, 41, 42, 43, 44, 41, 42, 43, 44, 25, 26, 27, 28,
-        29, 30, 31, 32, 29, 30, 31, 32, 17, 18, 19, 20, 21, 22, 23, 24, 21, 22, 23, 24, 5, 6, 7, 8, 9, 10, 11, 12, 9,
-        10, 11, 12]
-multiply = 1  # To compensate for the no of timesteps skipped when converting
+parser = argparse.ArgumentParser(
+    description="Calculate distances between pairs of atoms using a configuration file"
+)
+parser.add_argument(
+    "config",
+    nargs="?",
+    default="distance_config.json",
+    help="Path to JSON file containing input parameters",
+)
+args = parser.parse_args()
+
+with open(args.config) as cfg_file:
+    cfg = json.load(cfg_file)
+
+filename = cfg["filename"]
+AtmA = cfg["AtmA"]
+AtmB = cfg["AtmB"]
+multiply = cfg.get("multiply", 1)  # To compensate for the no of timesteps skipped when converting
 
 xyz = open(filename, 'r')
 # coord_rec = open("AtmDist.txt", 'w')
